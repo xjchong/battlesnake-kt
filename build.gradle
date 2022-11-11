@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+    }
+}
+
+apply plugin: 'application'
+
+mainClassName = "com.battlesnake.AppKt"
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'kotlin'
+
+compileKotlin.kotlinOptions.jvmTarget = "11"
+compileTestKotlin.kotlinOptions.jvmTarget = "11"
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation "io.ktor:ktor-server-core:1.6.5"
+    implementation "io.ktor:ktor-server-netty:1.6.5"
+    implementation "io.ktor:ktor-jackson:1.6.5"
+    implementation "ch.qos.logback:logback-classic:1.2.5"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+}
